@@ -32,6 +32,20 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# phone numbers validation
+gem 'phonelib'
+# pagination
+gem 'kaminari'
+# REST-like API framework
+gem 'grape'
+# JSON serializer
+gem 'fast_jsonapi'
+# state machine gem
+gem 'aasm'
+# authorization gem
+gem 'cancancan'
+# safe deletion
+gem 'paranoia'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -39,8 +53,16 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  # styling gem
-  gem 'rubocop', '~> 0.68.1'
+   # beautify console
+  gem 'pry'
+  gem 'pry-rails'
+  # rspec utilities
+  gem 'factory_bot_rails'
+  gem 'guard-rspec'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
@@ -50,6 +72,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # styling gem
+  gem 'rubocop', '~> 0.68.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
