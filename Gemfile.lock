@@ -1,3 +1,23 @@
+GIT
+  remote: https://github.com/drapergem/draper.git
+  revision: d44c86f1e560afc0cf0dad4ae09bfaa3f10a1759
+  specs:
+    draper (3.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
+      activemodel-serializers-xml (>= 1.0)
+      activesupport (>= 5.0)
+      request_store (>= 1.0)
+
+GIT
+  remote: https://github.com/rails/activemodel-serializers-xml
+  revision: 93689638c28525acc65afb638fce866826532641
+  specs:
+    activemodel-serializers-xml (1.0.2)
+      activemodel (>= 5.0.0.a)
+      activesupport (>= 5.0.0.a)
+      builder (~> 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,8 +108,6 @@ GEM
       railties (>= 4.2.0)
     faker (1.9.3)
       i18n (>= 0.7)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
     ffi (1.10.0)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -207,6 +225,8 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.4.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -306,14 +326,15 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  activemodel-serializers-xml!
   byebug
   cancancan
   capybara (>= 2.15)
   coffee-rails (~> 4.2)
   database_cleaner
+  draper!
   factory_bot_rails
   faker
-  fast_jsonapi
   grape
   guard-rspec
   jbuilder (~> 2.5)

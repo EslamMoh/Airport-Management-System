@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190510044757) do
+ActiveRecord::Schema.define(version: 20190510203104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20190510044757) do
   end
 
   create_table "flight_executions", force: :cascade do |t|
-    t.bigint "flight_id"
     t.bigint "airplane_id"
     t.bigint "departure_terminal_id"
     t.bigint "destination_terminal_id"
@@ -61,7 +60,15 @@ ActiveRecord::Schema.define(version: 20190510044757) do
     t.index ["airplane_id"], name: "index_flight_executions_on_airplane_id"
     t.index ["departure_terminal_id"], name: "index_flight_executions_on_departure_terminal_id"
     t.index ["destination_terminal_id"], name: "index_flight_executions_on_destination_terminal_id"
-    t.index ["flight_id"], name: "index_flight_executions_on_flight_id"
+  end
+
+  create_table "flight_flight_executions", force: :cascade do |t|
+    t.bigint "flight_id"
+    t.bigint "flight_execution_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flight_execution_id"], name: "index_flight_flight_executions_on_flight_execution_id"
+    t.index ["flight_id"], name: "index_flight_flight_executions_on_flight_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -139,9 +146,10 @@ ActiveRecord::Schema.define(version: 20190510044757) do
   add_foreign_key "airport_airlines", "airlines"
   add_foreign_key "airport_airlines", "airports"
   add_foreign_key "flight_executions", "airplanes"
-  add_foreign_key "flight_executions", "flights"
   add_foreign_key "flight_executions", "terminals", column: "departure_terminal_id"
   add_foreign_key "flight_executions", "terminals", column: "destination_terminal_id"
+  add_foreign_key "flight_flight_executions", "flight_executions"
+  add_foreign_key "flight_flight_executions", "flights"
   add_foreign_key "flights", "airports", column: "departure_airport_id"
   add_foreign_key "flights", "airports", column: "destination_airport_id"
   add_foreign_key "seats", "flight_executions"

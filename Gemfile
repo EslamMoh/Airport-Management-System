@@ -39,7 +39,8 @@ gem 'kaminari'
 # REST-like API framework
 gem 'grape'
 # JSON serializer
-gem 'fast_jsonapi'
+gem 'draper', github: 'drapergem/draper'
+gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
 # state machine gem
 gem 'aasm'
 # authorization gem
