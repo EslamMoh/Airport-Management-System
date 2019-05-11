@@ -49,6 +49,8 @@ gem 'cancancan'
 gem 'paranoia'
 # password encryption
 gem 'bcrypt', '~> 3.1.7'
+# api authentication
+gem 'jwt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
