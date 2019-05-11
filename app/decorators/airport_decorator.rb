@@ -3,8 +3,10 @@ class AirportDecorator < Draper::Decorator
 
   def as_json(options = {})
     {
+      id: id,
       name: name,
-      city: city
+      city: city,
+      airlines: airlines.try(:decorate).try(:as_json)
     }
   end
 end

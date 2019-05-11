@@ -3,6 +3,7 @@ class FlightDecorator < Draper::Decorator
 
   def as_json(options = {})
     {
+      id: id,
       name: name,
       price: price,
       type: type,
