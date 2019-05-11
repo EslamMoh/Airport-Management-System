@@ -1,6 +1,7 @@
 class Auth::AuthorizeApiRequest
-  def initialize(headers = {})
+  def initialize(headers = {}, user_type)
     @headers = headers
+    @user_type = user_type
   end
 
   # Service entry point - return valid user object
@@ -12,12 +13,12 @@ class Auth::AuthorizeApiRequest
 
   private
 
-  attr_reader :headers
+  attr_reader :headers, :user_type
 
   def user
     # check if user is in the database
     # memoize user object
-    @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    @user ||= user_type.constantize.find(decoded_auth_token[:user_id]) if decoded_auth_token
     # handle user not found
   rescue ActiveRecord::RecordNotFound => e
     # raise custom error

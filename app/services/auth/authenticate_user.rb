@@ -1,7 +1,8 @@
 class Auth::AuthenticateUser
-  def initialize(email, password)
+  def initialize(email, password, user_type)
     @email = email
     @password = password
+    @user_type = user_type
   end
 
   # Service entry point
@@ -11,11 +12,11 @@ class Auth::AuthenticateUser
 
   private
 
-  attr_reader :email, :password
+  attr_reader :email, :password, :user_type
 
   # verify user credentials
   def user
-    user = User.find_by(email: email)
+    user = user_type.constantize.find_by(email: email)
     return user if user && user.authenticate(password)
 
     # raise Authentication error if credentials are invalid
