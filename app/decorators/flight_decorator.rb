@@ -14,8 +14,8 @@ class FlightDecorator < Draper::Decorator
       arrival_time: arrival_time,
       remaining_tickets: capacity,
       departure_airport: departure_airport.try(:decorate).try(:as_json),
-      destination_airport: destination_airport.try(:decorate).try(:as_json)
-      # flight_details: flight_executions.try(:decorate).try(:as_json)
+      destination_airport: destination_airport.try(:decorate).try(:as_json),
+      flight_details: flight_executions.try(:decorate).try(:as_json)
     }
   end
 end

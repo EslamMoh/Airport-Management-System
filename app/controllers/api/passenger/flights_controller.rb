@@ -2,7 +2,7 @@ class Api::Passenger::FlightsController < Api::BaseController
   before_action :set_flight, only: [:show]
 
   def index
-    @flights = Flight.all.page(page).per(per)
+    @flights = Flight.includes(:departure_airport, :destination_airport).all.page(page).per(per)
     render json: PageDecorator.decorate(@flights)
   end
 
