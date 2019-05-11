@@ -1,4 +1,4 @@
-class PassengerDecorator < Draper::Decorator
+class UserDecorator < Draper::Decorator
   delegate_all
 
   def as_json(options = {})
@@ -7,9 +7,8 @@ class PassengerDecorator < Draper::Decorator
       name: name,
       phone: phone,
       country: country,
-      address: address,
       email: email,
-      birth_date: birth_date
+      details: details
     }
   end
 end

@@ -4,7 +4,6 @@ class SeatDecorator < Draper::Decorator
   def as_json(options = {})
     {
       id: id,
-      ticket: ticket.try(:decorate).try(:as_json),
       flight_details: flight_execution.decorate.as_json,
       status: status
     }

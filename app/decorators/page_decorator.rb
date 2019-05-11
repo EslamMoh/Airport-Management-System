@@ -6,7 +6,7 @@ class PageDecorator < Draper::Decorator
       page: current_page,
       records_per_page: model.count,
       total: total_count,
-      records: model.decorate
+      records: model.decorate.as_json(options)
     }
   end
 end
