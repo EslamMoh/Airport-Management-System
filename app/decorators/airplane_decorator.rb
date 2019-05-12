@@ -1,7 +1,7 @@
 class AirplaneDecorator < Draper::Decorator
   delegate_all
 
-  def as_json(options = {})
+  def as_json
     {
       id: id,
       manufacturer: manufacturer,

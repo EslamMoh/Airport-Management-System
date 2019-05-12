@@ -1,7 +1,7 @@
 class FlightExecutionDecorator < Draper::Decorator
   delegate_all
 
-  def as_json(options = {})
+  def as_json
     {
       id: id,
       departure_airport: departure_terminal.airport.name,
