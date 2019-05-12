@@ -8,12 +8,12 @@ module Api
         def index
           @flights = Flight.includes(:departure_airport, :destination_airport,
                                      :flight_executions).all.page(page).per(per)
-          render json: PageDecorator.decorate(@flights)
-                                    .as_json(flight_details: true)
+          json_response(PageDecorator.decorate(@flights)
+                                    .as_json(flight_details: true), :ok)
         end
 
         def show
-          render json: @flight.decorate.as_json(flight_details: true)
+          json_response(@flight.decorate.as_json(flight_details: true), :ok)
         end
 
         private

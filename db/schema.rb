@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190511030450) do
+ActiveRecord::Schema.define(version: 20190512020842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(version: 20190511030450) do
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "country"
+    t.index ["user_id"], name: "index_airports_on_user_id"
   end
 
   create_table "flight_executions", force: :cascade do |t|
@@ -138,14 +141,13 @@ ActiveRecord::Schema.define(version: 20190511030450) do
     t.json "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "airport_id"
     t.string "password_digest"
-    t.index ["airport_id"], name: "index_users_on_airport_id"
   end
 
   add_foreign_key "airplanes", "airlines"
   add_foreign_key "airport_airlines", "airlines"
   add_foreign_key "airport_airlines", "airports"
+  add_foreign_key "airports", "users"
   add_foreign_key "flight_executions", "airplanes"
   add_foreign_key "flight_executions", "terminals", column: "departure_terminal_id"
   add_foreign_key "flight_executions", "terminals", column: "destination_terminal_id"
@@ -158,5 +160,4 @@ ActiveRecord::Schema.define(version: 20190511030450) do
   add_foreign_key "terminals", "airports"
   add_foreign_key "tickets", "flights"
   add_foreign_key "tickets", "passengers"
-  add_foreign_key "users", "airports"
 end

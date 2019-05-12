@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     namespace :users do
       namespace :v1 do
+        resources :airports, only: %i[index show update create destroy]
         post 'auth/login', to: 'authentication#authenticate'
         post 'signup', to: 'users#create'
       end
