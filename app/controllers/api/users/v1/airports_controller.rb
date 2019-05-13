@@ -2,19 +2,23 @@ module Api
   module Users
     module V1
       class AirportsController < Api::BaseController
-        before_action :set_airport, only: %i[show update destroy]
+        before_action :set_airport, only: %i[update destroy]
 
         # GET /api/users/v1/airports
-        # fetch all users airports
+        # fetches all airports, to add any of them later to flight or
+        # flight execution as departure or destination airport
         def index
-          airports = scope.page(page).per(per)
-          json_response(PageDecorator.decorate(airports), :ok)
+          airports = Airport.all.page(page).per(per)
+          json_response(PageDecorator.decorate(airports)
+                                     .as_json(airport_details: true), :ok)
         end
 
         # GET /api/users/v1/airports/1
-        # fetch airport by id
+        # fetch any airport by id, to add it later to flight or
+        # flight execution as departure or destination airport
         def show
-          json_response(@airport.decorate, :ok)
+          @airport = Airport.find(params[:id])
+          json_response(@airport.decorate.as_json(airport_details: true), :ok)
         end
 
         # POST /api/users/v1/airports
@@ -23,7 +27,7 @@ module Api
           @airport = scope.new(airport_params)
 
           if @airport.save
-            json_response(@airport.decorate, :created)
+            json_response(@airport.decorate.as_json(airport_details: true), :created)
           else
             json_response(@airport.errors, :unprocessable_entity)
           end
@@ -33,7 +37,7 @@ module Api
         # update airport by id
         def update
           if @airport.update(airport_params)
-            json_response(@airport.decorate, :ok)
+            json_response(@airport.decorate.as_json(airport_details: true), :ok)
           else
             json_response(@airport.errors, :unprocessable_entity)
           end

@@ -16,6 +16,12 @@ class Auth::AuthorizeApiRequest
   attr_reader :headers, :user_type
 
   def user
+    # check if user type who trying to make request is the same user type
+    # that encoded in token
+    unless decoded_auth_token[:user_type] == user_type
+      raise(ExceptionHandler::UnpermittedAccess, Message.unpermitted_access)
+    end
+
     # check if user is in the database
     # memoize user object
     @user ||= user_type.constantize.find(decoded_auth_token[:user_id]) if decoded_auth_token

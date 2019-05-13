@@ -12,6 +12,12 @@ module Api
           json_response(response, :created)
         end
 
+        # GET /user
+        # get current user data
+        def show
+          json_response(current_user.decorate, :ok)
+        end
+
         private
 
         def user_params

@@ -30,4 +30,8 @@ class Message
   def self.expired_token
     'Sorry, your token has expired. Please login to continue.'
   end
+
+  def self.unpermitted_access
+    'Sorry, you are not permitted to access this request.'
+  end
 end

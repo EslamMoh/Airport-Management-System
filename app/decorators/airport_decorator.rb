@@ -8,8 +8,8 @@ class AirportDecorator < Draper::Decorator
       city: city
     }
 
-    if options[:flight_details]
-      output[:flight_details] = {
+    if options[:airport_details]
+      output[:airport_details] = {
         airlines: airlines.try(:decorate).try(:as_json),
         terminals: terminals.try(:decorate).try(:as_json)
       }

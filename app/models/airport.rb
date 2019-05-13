@@ -6,4 +6,8 @@ class Airport < ApplicationRecord
   has_many :departure_flights, class_name: 'Flight', foreign_key: 'departure_airport_id'
   has_many :airport_airlines, dependent: :destroy
   has_many :airlines, through: :airport_airlines
+
+  # validations
+  validates :name, :country, :city, presence: true
+  validates :name, :city, uniqueness: { scope: :user_id }
 end

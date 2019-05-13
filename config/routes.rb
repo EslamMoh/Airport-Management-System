@@ -11,8 +11,12 @@ Rails.application.routes.draw do
     namespace :users do
       namespace :v1 do
         resources :airports, only: %i[index show update create destroy]
+        resources :airlines, only: %i[index show update create]
+        post 'airport_airlines/:airport_id/:id', to: 'airlines#add_airport_airlines'
+        delete 'airlines/:airport_id/:id', to: 'airlines#destroy'
         post 'auth/login', to: 'authentication#authenticate'
         post 'signup', to: 'users#create'
+        get 'user', to: 'users#show'
       end
     end
   end
