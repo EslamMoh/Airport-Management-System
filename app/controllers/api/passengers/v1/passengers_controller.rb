@@ -12,6 +12,12 @@ module Api
           json_response(response, :created)
         end
 
+        # GET /passenger
+        # get current passenger data
+        def show
+          json_response(current_user.decorate, :ok)
+        end
+
         private
 
         def passenger_params

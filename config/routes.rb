@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         resources :flights, only: %i[show index]
         post 'auth/login', to: 'authentication#authenticate'
         post 'signup', to: 'passengers#create'
+        get 'passenger', to: 'passengers#show'
       end
     end
     namespace :users do
