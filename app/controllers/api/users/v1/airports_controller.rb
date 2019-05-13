@@ -8,7 +8,8 @@ module Api
         # fetches all airports, to add any of them later to flight or
         # flight execution as departure or destination airport
         def index
-          airports = Airport.all.page(page).per(per)
+          airports = Airport.includes(:terminals, :airlines).all.page(page)
+                            .per(per)
           json_response(PageDecorator.decorate(airports)
                                      .as_json(airport_details: true), :ok)
         end

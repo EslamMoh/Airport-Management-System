@@ -8,8 +8,9 @@ module Api
         # fetches all airlines, to add any of them later to
         # one of the owned airports
         def index
-          airlines = Airline.all.page(page).per(per)
-          json_response(PageDecorator.decorate(airlines), :ok)
+          airlines = Airline.includes(:airplanes).all.page(page).per(per)
+          json_response(PageDecorator.decorate(airlines)
+                                     .as_json(airplanes_details: true), :ok)
         end
 
         # POST /api/users/v1/airport_airlines/:airport_id/:id
@@ -22,7 +23,7 @@ module Api
         # GET /api/users/v1/airlines/:id
         # fetch any airline by id
         def show
-          json_response(@airline.decorate, :ok)
+          json_response(@airline.decorate.as_json(airplanes_details: true), :ok)
         end
 
         # POST /api/users/v1/airlines
@@ -31,7 +32,8 @@ module Api
           @airline = Airline.new(airline_params)
 
           if @airline.save
-            json_response(@airline.decorate, :created)
+            json_response(@airline.decorate.as_json(airplanes_details: true),
+                          :created)
           else
             json_response(@airline.errors, :unprocessable_entity)
           end
@@ -41,7 +43,8 @@ module Api
         # update airline by id
         def update
           if @airline.update(airline_params)
-            json_response(@airline.decorate, :ok)
+            json_response(@airline.decorate.as_json(airplanes_details: true),
+                          :ok)
           else
             json_response(@airline.errors, :unprocessable_entity)
           end
@@ -66,7 +69,8 @@ module Api
         end
 
         def scope
-          @airports = current_user.airports.find(params[:airport_id])
+          @airports = current_user.airports.includes(:airlines)
+                                  .find(params[:airport_id])
         end
       end
     end
