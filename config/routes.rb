@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :airports, only: %i[index show update create destroy]
         resources :airlines, only: %i[index show update create]
         resources :airplanes, only: %i[index show update create destroy]
+        resources :flights, only: %i[index show update create destroy]
         delete 'airlines/:airport_id/:id', to: 'airlines#destroy'
         delete 'terminals/:airport_id/:id', to: 'terminals#destroy'
         put 'terminals/:airport_id/:id', to: 'terminals#update'

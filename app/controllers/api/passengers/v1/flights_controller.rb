@@ -6,10 +6,11 @@ module Api
         before_action :set_flight, only: [:show]
 
         # GET /api/passengers/v1/flights
-        # List all flights
+        # List all available flights
         def index
           @flights = Flight.includes(:departure_airport, :destination_airport,
-                                     :flight_executions).all.page(page).per(per)
+                                     :flight_executions).available.page(page)
+                           .per(per)
           json_response(PageDecorator.decorate(@flights)
                                     .as_json(flight_details: true), :ok)
         end
