@@ -6,7 +6,7 @@ class FlightDecorator < Draper::Decorator
       id: id,
       name: name,
       price: price,
-      type: type,
+      type: flight_type,
       status: status,
       direction_type: direction_type,
       from: departure_country,

@@ -4,8 +4,10 @@ class User < ApplicationRecord
 
   # Model associations
   has_many :airports
+  has_many :flights
+  has_many :flight_executions
 
   # Validations
-  validates_presence_of :name, :email, :password_digest
+  validates :name, :email, :password_digest, presence: true
   validates :email, uniqueness: true
 end
