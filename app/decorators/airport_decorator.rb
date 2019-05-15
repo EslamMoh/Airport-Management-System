@@ -5,7 +5,8 @@ class AirportDecorator < Draper::Decorator
     output = {
       id: id,
       name: name,
-      city: city
+      city: city,
+      country: country
     }
 
     if options[:airport_details]
