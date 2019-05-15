@@ -134,9 +134,9 @@ ActiveRecord::Schema.define(version: 20190514030451) do
   create_table "tickets", force: :cascade do |t|
     t.bigint "flight_id"
     t.bigint "passenger_id"
-    t.string "payment_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "payment_status"
     t.index ["flight_id"], name: "index_tickets_on_flight_id"
     t.index ["passenger_id"], name: "index_tickets_on_passenger_id"
   end

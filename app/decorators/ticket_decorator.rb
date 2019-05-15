@@ -5,7 +5,7 @@ class TicketDecorator < Draper::Decorator
     {
       id: id,
       flight: flight.decorate.as_json,
-      seats: seats.decorate.as_json,
+      seats: seats.decorate.as_json(flight_details: true),
       payment_status: payment_status
     }
   end

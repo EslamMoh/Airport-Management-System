@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     namespace :passengers do
       namespace :v1 do
         resources :flights, only: %i[show index]
+        resources :tickets, only: %i[index show create]
+        post 'tickets/:id', to: 'tickets#confirm'
         post 'auth/login', to: 'authentication#authenticate'
         post 'signup', to: 'passengers#create'
         get 'passenger', to: 'passengers#show'

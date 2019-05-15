@@ -7,12 +7,13 @@ class Seat < ApplicationRecord
     state :booked
     state :pending
 
-    event :reserve do
+    event :book do
       transitions from: :available, to: :pending
     end
 
     event :confirm do
       transitions from: :pending, to: :booked
+      error
     end
   end
 
