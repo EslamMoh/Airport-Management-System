@@ -2,7 +2,9 @@ module Api
   module Users
     module V1
       class FlightsController < Api::BaseController
-        before_action :set_flight, only: %i[update destroy show]
+        before_action :set_flight, only: %i[update destroy show
+                                            add_flight_executions
+                                            remove_flight_execution]
 
         # GET /api/users/v1/flights
         # fetches current user flights
@@ -50,6 +52,23 @@ module Api
           head :no_content
         end
 
+        # POST /api/users/v1/flights/flight_executions/:flight_id
+        # add any flight executions to current users flight
+        def add_flight_executions
+          @flight.flight_executions << FlightExecution
+                                       .where(id: flight_execution_params['flight_executions_ids'])
+          json_response(@flight.decorate.as_json(flight_details: true),
+                        :created)
+        end
+
+        # DELETE /api/users/v1/flights/flight_executions/:flight_id/:flight_execution_id
+        # remove flight execution from current users flight
+        def remove_flight_execution
+          flight_execution = FlightExecution.find(params[:flight_execution_id])
+          @flight.flight_executions.delete(flight_execution)
+          head :no_content
+        end
+
         private
 
         def set_flight
@@ -63,6 +82,10 @@ module Api
                                            :departure_airport_id, :arrival_time,
                                            :departure_time, :price,
                                            :destination_airport_id)
+        end
+
+        def flight_execution_params
+          params.permit(flight_executions_ids: [])
         end
 
         def scope
