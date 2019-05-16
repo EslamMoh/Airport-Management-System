@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190514030451) do
+ActiveRecord::Schema.define(version: 20190516014343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20190514030451) do
     t.bigint "destination_airport_id"
     t.datetime "departure_time"
     t.datetime "arrival_time"
-    t.integer "capacity"
+    t.integer "tickets_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"

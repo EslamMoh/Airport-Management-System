@@ -20,7 +20,7 @@ class Flight < ApplicationRecord
   has_many :flight_executions, through: :flight_flight_executions
 
   # validations
-  validates :departure_time, :arrival_time, :capacity, :destination_country,
+  validates :departure_time, :arrival_time, :tickets_count, :destination_country,
             :departure_country, :status, :direction_type, :flight_type, :name,
             :price, presence: true
 

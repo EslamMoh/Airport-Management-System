@@ -78,7 +78,7 @@ module Api
         def flight_params
           params.fetch(:flight, {}).permit(:name, :flight_type,
                                            :direction_type, :departure_country,
-                                           :destination_country, :capacity,
+                                           :destination_country, :tickets_count,
                                            :departure_airport_id, :arrival_time,
                                            :departure_time, :price,
                                            :destination_airport_id)

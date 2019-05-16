@@ -47,8 +47,8 @@ class Ticket < ApplicationRecord
   end
 
   def update_flight_capacity
-    flight_capacity = flight.capacity - 1
-    flight.update!(capacity: flight_capacity)
+    flight_capacity = flight.tickets_count - 1
+    flight.update!(tickets_count: flight_capacity)
 
     flight.sold! if flight_capacity.zero?
   end
