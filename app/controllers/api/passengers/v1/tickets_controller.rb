@@ -9,8 +9,7 @@ module Api
         def index
           tickets = scope.includes({ seats: [:flight_execution] }, :flight).all
                          .page(page).per(per)
-          json_response(PageDecorator.decorate(tickets)
-                                     .as_json(airport_details: true), :ok)
+          json_response(PageDecorator.decorate(tickets), :ok)
         end
 
         # GET /api/passengers/v1/tickets/1

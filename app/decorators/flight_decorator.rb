@@ -13,9 +13,7 @@ class FlightDecorator < Draper::Decorator
       to: destination_country,
       departure_time: departure_time,
       arrival_time: arrival_time,
-      remaining_tickets: tickets_count,
-      departure_airport: departure_airport.try(:decorate).try(:as_json),
-      destination_airport: destination_airport.try(:decorate).try(:as_json)
+      remaining_tickets: tickets_count
     }
 
     if options[:flight_details]
