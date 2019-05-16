@@ -13,13 +13,6 @@ module Api
                                      .as_json(airplanes_details: true), :ok)
         end
 
-        # POST /api/users/v1/airport_airlines/:airport_id/:id
-        # add airlines to airport by ids
-        def add_airport_airlines
-          scope.airlines << Airline.find(params[:id])
-          json_response(scope.decorate.as_json(airport_details: true), :ok)
-        end
-
         # GET /api/users/v1/airlines/:id
         # fetch any airline by id
         def show
@@ -50,14 +43,6 @@ module Api
           end
         end
 
-        # DELETE /api/users/v1/airlines/:airport_id/:id
-        # remove airline from airport by ids
-        def destroy
-          airline = scope.airlines.find(params[:id])
-          scope.airlines.delete(airline)
-          head :no_content
-        end
-
         private
 
         def set_airline
@@ -66,11 +51,6 @@ module Api
 
         def airline_params
           params.fetch(:airline, {}).permit(:name, :origin_country)
-        end
-
-        def scope
-          @airports = current_user.airports.includes(:airlines)
-                                  .find(params[:airport_id])
         end
       end
     end

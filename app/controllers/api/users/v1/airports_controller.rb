@@ -2,7 +2,9 @@ module Api
   module Users
     module V1
       class AirportsController < Api::BaseController
-        before_action :set_airport, only: %i[update destroy]
+        before_action :set_airport, only: %i[update destroy
+                                             add_airport_airlines
+                                             remove_airport_airline]
 
         # GET /api/users/v1/airports
         # fetches all airports, to add any of them later to flight or
@@ -28,7 +30,8 @@ module Api
           @airport = scope.new(airport_params)
 
           if @airport.save
-            json_response(@airport.decorate.as_json(airport_details: true), :created)
+            json_response(@airport.decorate.as_json(airport_details: true),
+                          :created)
           else
             json_response(@airport.errors, :unprocessable_entity)
           end
@@ -51,6 +54,21 @@ module Api
           head :no_content
         end
 
+        # POST /api/users/v1/airports/airlines/:id/:airline_id
+        # add airlines to airport by ids
+        def add_airport_airlines
+          @airport.airlines << Airline.find(params[:airline_id])
+          json_response(@airport.decorate.as_json(airport_details: true), :ok)
+        end
+
+        # DELETE /api/users/v1/airports/airlines/:id/:airline_id
+        # remove airline from airport by ids
+        def remove_airport_airline
+          airline = @airport.airlines.find(params[:airline_id])
+          @airport.airlines.delete(airline)
+          head :no_content
+        end
+
         private
 
         def set_airport
@@ -62,7 +80,7 @@ module Api
         end
 
         def scope
-          @airports = current_user.airports
+          @airports = current_user.airports.includes(:airlines, :terminals)
         end
       end
     end

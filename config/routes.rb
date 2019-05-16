@@ -18,12 +18,12 @@ Rails.application.routes.draw do
         resources :airplanes, only: %i[index show update create destroy]
         resources :flights, only: %i[index show update create destroy]
         resources :flight_executions, only: %i[index show update create destroy]
-        delete 'airlines/:airport_id/:id', to: 'airlines#destroy'
+        delete 'airports/airlines/:id/:airline_id', to: 'airports#remove_airport_airline'
         delete 'terminals/:airport_id/:id', to: 'terminals#destroy'
         delete 'flights/flight_executions/:id/:flight_execution_id', to: 'flights#remove_flight_execution'
         put 'terminals/:airport_id/:id', to: 'terminals#update'
         post 'flights/flight_executions/:id', to: 'flights#add_flight_executions'
-        post 'airport_airlines/:airport_id/:id', to: 'airlines#add_airport_airlines'
+        post 'airports/airlines/:id/:airline_id', to: 'airports#add_airport_airlines'
         post 'auth/login', to: 'authentication#authenticate'
         post 'signup', to: 'users#create'
         post 'terminals/:airport_id', to: 'terminals#create'
