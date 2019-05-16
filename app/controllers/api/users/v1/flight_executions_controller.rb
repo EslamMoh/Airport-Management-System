@@ -2,7 +2,7 @@ module Api
   module Users
     module V1
       class FlightExecutionsController < Api::BaseController
-        before_action :set_flight_execution, only: %i[update destroy show]
+        before_action :set_flight_execution, only: %i[update destroy show seats]
 
         # GET /api/users/v1/flight_executions
         # fetches current user flight executions
@@ -46,6 +46,15 @@ module Api
         def destroy
           @flight_execution.destroy
           head :no_content
+        end
+
+        # GET /api/users/v1/flight_executions/seats/:id
+        # fetches current user flight execution seats
+        def seats
+          seats = @flight_execution.seats.includes(ticket: [:passenger])
+                                   .page(page).per(per)
+          json_response(PageDecorator.decorate(seats)
+                                     .as_json(passenger_details: true), :ok)
         end
 
         private

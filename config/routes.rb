@@ -29,6 +29,7 @@ Rails.application.routes.draw do
         post 'terminals/:airport_id', to: 'terminals#create'
         get 'terminals/:airport_id', to: 'terminals#index'
         get 'terminals/:airport_id/:id', to: 'terminals#show'
+        get 'flight_executions/seats/:id', to: 'flight_executions#seats'
         get 'user', to: 'users#show'
       end
     end

@@ -13,7 +13,7 @@ class SeatDecorator < Draper::Decorator
     end
 
     if options[:passenger_details]
-      output[:passenger_details] = ticket.passenger.try(:decorate).try(:as_json)
+      output[:passenger_details] = ticket ? ticket.passenger.try(:decorate).try(:as_json) : 'N/A'
     end
     output
   end
