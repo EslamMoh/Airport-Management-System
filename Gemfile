@@ -35,17 +35,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'phonelib'
 # pagination
 gem 'kaminari'
-# REST-like API framework
-gem 'grape'
 # JSON serializer
 gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
 gem 'draper', github: 'drapergem/draper'
 # state machine gem
 gem 'aasm'
-# authorization gem
-gem 'cancancan'
-# safe deletion
-gem 'paranoia'
 # password encryption
 gem 'bcrypt', '~> 3.1.7'
 # api authentication
