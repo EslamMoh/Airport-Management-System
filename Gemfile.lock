@@ -18,6 +18,14 @@ GIT
       activesupport (>= 5.0.0.a)
       builder (~> 3.1)
 
+GIT
+  remote: https://github.com/thoughtbot/shoulda-matchers.git
+  revision: 4b160bd19ecca7f97d7ac22dccd5fde9b0da5a9f
+  branch: rails-5
+  specs:
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -257,8 +265,6 @@ GEM
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
     shellany (0.0.1)
-    shoulda-matchers (4.0.1)
-      activesupport (>= 4.2.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -325,7 +331,7 @@ DEPENDENCIES
   rubocop (~> 0.68.1)
   sass-rails (~> 5.0)
   selenium-webdriver
-  shoulda-matchers
+  shoulda-matchers!
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

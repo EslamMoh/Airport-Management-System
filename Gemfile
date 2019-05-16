@@ -63,7 +63,6 @@ group :development, :test do
   gem 'rspec-its'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
-  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -77,5 +76,8 @@ group :development do
   gem 'rubocop', '~> 0.68.1'
 end
 
+group :test do
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
