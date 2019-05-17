@@ -14,6 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'database_cleaner'
+require 'faker'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 

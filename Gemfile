@@ -57,7 +57,6 @@ group :development, :test do
   # rspec utilities
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'guard-rspec'
   gem 'rspec-collection_matchers'
   gem 'rspec-its'
@@ -79,6 +78,7 @@ end
 group :test do
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem 'shoulda-callback-matchers', '~> 1.1.1'
+  gem 'faker', '~> 1.4.3'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

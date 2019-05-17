@@ -4,7 +4,7 @@ RSpec.describe FlightExecution, type: :model do
   # Association test
   it { should belong_to(:airplane) }
   it do
-     should belong_to(:departure_terminal).class_name('Terminal')
+    should belong_to(:departure_terminal).class_name('Terminal')
   end
   it do
     should belong_to(:destination_terminal).class_name('Terminal')
