@@ -7,8 +7,8 @@ RSpec.describe Airplane, type: :model do
   it { should have_many(:seats) }
 
   # Validation test
-  it { should validate_presence_of(:manufacturer) }
-  it { should validate_presence_of(:model_number) }
-  it { should validate_presence_of(:capacity) }
+  %i[manufacturer model_number capacity].each do |field|
+    it { should validate_presence_of(field) }
+  end
   it { should validate_uniqueness_of(:model_number) }
 end
