@@ -10,4 +10,20 @@ RSpec.describe Passenger, type: :model do
     it { should validate_presence_of(field) }
   end
   it { should validate_uniqueness_of(:email) }
+  it 'should validate that phone is available' do
+    subject.phone = '01000510'
+    subject.valid? # run validations
+    expect(subject.errors[:phone]).to include('is invalid')
+    subject.phone = '201111628811'
+    subject.valid? # run validations
+    expect(subject.errors[:phone]).to_not include('is invalid')
+  end
+  it 'should validate that email is available' do
+    subject.email = 'test.com'
+    subject.valid? # run validations
+    expect(subject.errors[:email]).to include('only allows valid emails')
+    subject.email = 'test@gmail.com'
+    subject.valid? # run validations
+    expect(subject.errors[:phone]).to_not include('only allows valid emails')
+  end
 end
