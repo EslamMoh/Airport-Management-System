@@ -15,4 +15,8 @@ RSpec.describe Flight, type: :model do
     .each do |field|
     it { should validate_presence_of(field) }
   end
+
+  # enums
+  it { should define_enum_for(:flight_type).with(%i[stop non_stop]) }
+  it { should define_enum_for(:direction_type).with(%i[one_way round]) }
 end
