@@ -1,6 +1,6 @@
 # Airport Management System :
 
-This application is for managing an airport system using Api's secured by JWT, There are 2 roles in the app: passenger and user , passenger can view available flights and reserve tickets from selected flight and user can manage flights , airports , airports terminals , airlines , seats and tickets
+This application is for managing airports using Api's which secured by JWT, There are 2 roles in the app: passenger and user , passenger can view available flights and reserve tickets from selected flight and user can manage flights , airports , airports terminals , airlines , seats and tickets
 
 ## Setting up the environment :
 
