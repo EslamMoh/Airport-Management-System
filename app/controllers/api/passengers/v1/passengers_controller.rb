@@ -7,8 +7,11 @@ module Api
         # return authenticated token upon signup
         def create
           passenger = ::Passenger.create!(passenger_params)
-          auth_token = Auth::AuthenticateUser.new(passenger.email, passenger.password, 'Passenger').call
-          response = { message: Message.account_created, auth_token: auth_token }
+          auth_token = Auth::AuthenticateUser.new(passenger.email,
+                                                  passenger.password,
+                                                  'Passenger').call
+          response = { message: Message.account_created,
+                       auth_token: auth_token }
           json_response(response, :created)
         end
 

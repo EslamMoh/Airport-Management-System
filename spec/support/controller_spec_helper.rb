@@ -9,4 +9,8 @@ module ControllerSpecHelper
     JsonWebToken.encode({ user_id: user_id, user_type: user_type },
                         (Time.now.to_i - 10))
   end
+
+  def authorization_header(token)
+    request.headers['Authorization'] = "Bearer #{token}"
+  end
 end

@@ -24,6 +24,7 @@ RSpec.describe Api::Passengers::V1::AuthenticationController, type: :controller 
     context 'When request is valid' do
       it 'returns an authentication token' do
         post :authenticate, params: valid_credentials
+        expect(response).to have_http_status(:ok)
         expect(JSON.parse(response.body)['auth_token']).not_to be_nil
       end
     end
@@ -31,6 +32,7 @@ RSpec.describe Api::Passengers::V1::AuthenticationController, type: :controller 
     context 'When request is invalid' do
       it 'returns a failure message' do
         post :authenticate, params: invalid_credentials
+        expect(response).to have_http_status(:unauthorized)
         expect(JSON.parse(response.body)['message'])
           .to match('Invalid credentials')
       end
