@@ -58,7 +58,8 @@ module Api
         # add airlines to airport by ids
         def add_airport_airlines
           @airport.airlines << Airline.find(params[:airline_id])
-          json_response(@airport.decorate.as_json(airport_details: true), :ok)
+          json_response(@airport.decorate.as_json(airport_details: true),
+                        :created)
         end
 
         # DELETE /api/users/v1/airports/airlines/:id/:airline_id

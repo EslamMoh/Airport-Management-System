@@ -171,7 +171,7 @@ RSpec.describe Api::Users::V1::AirportsController, type: :controller do
       it 'returns airport' do
         post :add_airport_airlines,
              params: { id: first_airport, airline_id: airline.id }
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:created)
         expect(JSON.parse(response.body)['id']).to eq(first_airport.id)
       end
     end
@@ -186,7 +186,7 @@ RSpec.describe Api::Users::V1::AirportsController, type: :controller do
       end
     end
 
-    context 'add airline to airport by invalid ids without token' do
+    context 'add airline to airport by invalid ids' do
       before(:each) { authorization_header(token) }
       it 'returns not found entity' do
         post :add_airport_airlines,
@@ -205,7 +205,7 @@ RSpec.describe Api::Users::V1::AirportsController, type: :controller do
     end
     context 'remove airline from airport by ids' do
       before(:each) { authorization_header(token) }
-      it 'returns airport' do
+      it 'returns no content' do
         delete :remove_airport_airline,
                params: { id: airport_airline.airport_id,
                          airline_id: airport_airline.airline_id }
@@ -224,7 +224,7 @@ RSpec.describe Api::Users::V1::AirportsController, type: :controller do
       end
     end
 
-    context 'remove airline from airport by invalid ids without token' do
+    context 'remove airline from airport by invalid ids' do
       before(:each) { authorization_header(token) }
       it 'returns not found entity' do
         delete :remove_airport_airline,

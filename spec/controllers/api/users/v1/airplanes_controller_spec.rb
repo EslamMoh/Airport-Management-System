@@ -143,7 +143,7 @@ RSpec.describe Api::Users::V1::AirplanesController, type: :controller do
   describe 'DELETE /airplanes/:id' do
     context 'deleting airplane by airplane id' do
       before(:each) { authorization_header(token) }
-      it 'returns airplane' do
+      it 'returns no content' do
         delete :destroy, params: { id: first_airplane.id }
         expect(response).to have_http_status(:no_content)
       end
