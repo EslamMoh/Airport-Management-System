@@ -5,10 +5,10 @@ RSpec.describe Api::Passengers::V1::TicketsController, type: :controller do
   let!(:passenger) { create(:passenger) }
   let!(:first_ticket) { create(:ticket, passenger: passenger) }
   let!(:second_ticket) { create(:ticket, passenger: passenger) }
+  let(:token) { token_generator(passenger.id, 'Passenger') }
 
   describe 'GET /tickets' do
     context 'fetching current passenger tickets' do
-      let(:token) { token_generator(passenger.id, 'Passenger') }
       before(:each) { authorization_header(token) }
       it 'returns list of tickets' do
         get :index
@@ -29,7 +29,6 @@ RSpec.describe Api::Passengers::V1::TicketsController, type: :controller do
 
   describe 'GET /tickets/:id' do
     context 'fetching current passenger ticket by ticket id' do
-      let(:token) { token_generator(passenger.id, 'Passenger') }
       before(:each) { authorization_header(token) }
       it 'returns ticket' do
         get :show, params: { id: first_ticket.id }
@@ -47,10 +46,9 @@ RSpec.describe Api::Passengers::V1::TicketsController, type: :controller do
       end
     end
 
-    context 'fetching current passenger ticket by ticket id' do
-      let(:token) { token_generator(passenger.id, 'Passenger') }
+    context 'fetching current passenger ticket by invalid ticket id' do
       before(:each) { authorization_header(token) }
-      it 'returns ticket' do
+      it 'returns not found' do
         get :show, params: { id: Faker::Number.number(2) }
         expect(response).to have_http_status(:not_found)
       end
@@ -65,7 +63,6 @@ RSpec.describe Api::Passengers::V1::TicketsController, type: :controller do
       }
     end
     context 'create ticket for current passenger' do
-      let(:token) { token_generator(passenger.id, 'Passenger') }
       before(:each) { authorization_header(token) }
       it 'returns created ticket' do
         post :create, params: ticket_params
@@ -86,7 +83,6 @@ RSpec.describe Api::Passengers::V1::TicketsController, type: :controller do
 
   describe 'POST /tickets/:id' do
     context 'confirm current passenger ticket by ticket id' do
-      let(:token) { token_generator(passenger.id, 'Passenger') }
       before(:each) { authorization_header(token) }
       it 'returns ticket' do
         post :confirm, params: { id: first_ticket.id }
@@ -105,9 +101,8 @@ RSpec.describe Api::Passengers::V1::TicketsController, type: :controller do
     end
 
     context 'confirm passenger ticket by invalid ticket id without token' do
-      let(:token) { token_generator(passenger.id, 'Passenger') }
       before(:each) { authorization_header(token) }
-      it 'returns unprocessable entity' do
+      it 'returns not found' do
         post :confirm, params: { id: Faker::Number.number(2) }
         expect(response).to have_http_status(:not_found)
         expect(JSON.parse(response.body)['message'])

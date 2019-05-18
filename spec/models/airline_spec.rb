@@ -8,4 +8,7 @@ RSpec.describe Airline, type: :model do
 
   # Validation test
   it { should validate_uniqueness_of(:name) }
+  %i[name origin_country].each do |field|
+    it { should validate_presence_of(field) }
+  end
 end

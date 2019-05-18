@@ -5,5 +5,6 @@ class Airline < ApplicationRecord
   has_many :airports, through: :airport_airlines
 
   # validations
+  validates :name, :origin_country, presence: true
   validates :name, uniqueness: true
 end
