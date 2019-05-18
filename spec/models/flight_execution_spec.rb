@@ -10,7 +10,7 @@ RSpec.describe FlightExecution, type: :model do
     should belong_to(:destination_terminal).class_name('Terminal')
   end
   it { should belong_to(:user) }
-  it { should have_many(:seats) }
+  it { should have_many(:seats).dependent(:destroy) }
   it { should have_many(:flight_flight_executions).dependent(:destroy) }
   it { should have_many(:flights).through(:flight_flight_executions) }
 
