@@ -8,11 +8,11 @@ RSpec.describe Api::Users::V1::TerminalsController, type: :controller do
   let!(:first_terminal) { create(:terminal, airport: airport) }
   let!(:second_terminal) { create(:terminal, airport: airport) }
 
-  describe 'GET /terminals' do
+  describe 'GET /terminals/:airport_id' do
     context 'fetching airport terminals' do
       before(:each) { authorization_header(token) }
       it 'returns list of terminals' do
-        get :index, params: { airport_id: airport.id}
+        get :index, params: { airport_id: airport.id }
         expect(response).to have_http_status(:ok)
         expect(JSON.parse(response.body)['records'].size).to eq(2)
       end
@@ -20,7 +20,7 @@ RSpec.describe Api::Users::V1::TerminalsController, type: :controller do
 
     context 'fetching terminals without token' do
       it 'returns unprocessable entity with failure message' do
-        get :index, params: { airport_id: airport.id}
+        get :index, params: { airport_id: airport.id }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(JSON.parse(response.body)['message'])
           .not_to be_nil
