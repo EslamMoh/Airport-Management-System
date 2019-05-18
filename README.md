@@ -14,5 +14,5 @@ This application is for managing an airport system using Api's secured by JWT, T
   - Create config/database.yml file to match your PostgreSQL server configurations
   - Run `bundle exec rake db:create` to create the database
   - Run `bundle exec rake db:schema:load` to load the current schema to your database
-	- Run Rails local server using command `rails s`
+  - Run Rails local server using command `rails s`
   - From Api Rest client, create api calls using `http://localhost:3000` as a base url 
